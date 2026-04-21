@@ -1,6 +1,11 @@
 #include "pinocchio_model_builder/pinocchio_model_builder.h"
 
 namespace pinocchio_model_builder {
+  pinocchio::JointModelComposite getBaseJointcomposite() {
+    pinocchio::JointModelComposite baseJointComposite(1);
+    baseJointComposite.addJoint(pinocchio::JointModelFreeFlyer());
+    return baseJointComposite;
+  };
   void buildModel(pinocchio::ModelTpl<double>& model, const std::string& urdfPath, const std::vector<std::string>& fixedJointNames, const pinocchio::JointModelComposite& baseJointComposite, urdf::ModelInterfaceSharedPtr urdfModel) {
     urdfModel = urdf::parseURDFFile(urdfPath);
     if (!urdfModel) {
