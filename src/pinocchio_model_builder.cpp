@@ -16,7 +16,8 @@ namespace pinocchio_model_builder {
       if (std::find(fixedJointNames.begin(), fixedJointNames.end(), jointPair.first) != fixedJointNames.end()) jointPair.second->type = urdf::Joint::FIXED;
     }
 
-    pinocchio::urdf::buildModel(urdfModel, baseJointComposite, model);
+    if (baseJointComposite.nq() == 0) pinocchio::urdf::buildModel(urdfModel, model);
+    else pinocchio::urdf::buildModel(urdfModel, baseJointComposite, model);
 
   }
 }
